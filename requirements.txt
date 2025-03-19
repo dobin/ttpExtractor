@@ -4,3 +4,5 @@ pypdf
 openai
 trafilatura
 flask
+ unstructured
+ unstructured[pdf]

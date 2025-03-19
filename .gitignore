@@ -3,3 +3,4 @@ doc/
 input/
 output/
 *.key
+backup/
