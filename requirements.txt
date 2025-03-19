@@ -1,0 +1,6 @@
+langchain
+langchain-community
+pypdf
+openai
+trafilatura
+flask

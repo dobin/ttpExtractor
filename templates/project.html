@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ttpExtractor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <style>
+        table {
+            width: 100%;           /* Table will not exceed the screen width */
+            table-layout: fixed;   /* Ensures columns are evenly distributed */
+            border-collapse: collapse;
+        }
+        th, td {
+            word-wrap: break-word; /* Allows text wrapping */
+            overflow-wrap: break-word; /* Ensures breaking of long words */
+            max-width: 300px;      /* Prevents extremely wide columns */
+            white-space: normal;   /* Allows text to wrap inside the cell */
+            padding: 8px;
+            border: 1px solid black;
+        }
+    </style>
+
+    <h1>TTP Extractor: {{title}}</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    Original file: <a href="{{original_file}}">{{original_file}}</a> <br>
+    {% if metadata != None %}
+            Note: {{ metadata["note"] }} <br>
+            URL: {{ metadata["url"] }} <br>
+    {% endif %}
+
+    <h2>Results</h2>
+
+    <table border="1">
+        <tr>
+            <th>Original Text</th>
+            <th>LLM TTPs</th>
+        </tr>
+        {% for element in elements %}
+            <tr>
+                <td>{{element["text"] | safe}}</td>
+                <td>{{element["response"] | safe}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
+
+
