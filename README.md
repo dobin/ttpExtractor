@@ -6,7 +6,7 @@ With focus on the P (Procedures). As in, what the threat actors were actually do
 
 For RedTeamers seeking to imitate TAs. 
 
-Live at [https://ttpextractor.r00ted.ch](ttpextractor.r00ted.ch)
+Live at [ttpextractor.r00ted.ch](https://ttpextractor.r00ted.ch)
 
 
 ## Install
