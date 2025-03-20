@@ -6,6 +6,8 @@ With focus on the P (Procedures). As in, what the threat actors were actually do
 
 For RedTeamers seeking to imitate TAs. 
 
+Live at [https://ttpextractor.r00ted.ch](ttpextractor.r00ted.ch)
+
 
 ## Install
 
@@ -38,4 +40,6 @@ $ export OPENAI_API_KEY="..."
 $ export UPLOAD_PW="..."
 $ python ./web.py
 ```
+
+Open `http://localhost:5000`.
 
