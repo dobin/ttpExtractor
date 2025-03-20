@@ -35,11 +35,13 @@
         {% endif %}
     {% endwith %}
 
-    Original file: <a href="{{original_file}}">{{original_file}}</a> <br>
     {% if metadata != None %}
-            Note: {{ metadata["note"] }} <br>
-            URL: {{ metadata["url"] }} <br>
+            <h2>
+                <a href="{{ metadata['url'] }}">{{ metadata["note"] }}</a>
+            </h2>
     {% endif %}
+    <a href="/download/{{project_name}}">Original Report</a> <br>
+
 
     <h2>Results</h2>
 

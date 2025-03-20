@@ -1,6 +1,7 @@
+import sys
 import os
 import re
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_file
 from werkzeug.utils import secure_filename
 import json
 import threading
@@ -144,5 +145,25 @@ def upload_file():
     return redirect(url_for('home'))
 
 
+@app.route('/download/<project_name>')
+def download(project_name):
+    if not project_name == secure_filename(project_name):
+        flash('Invalid project name')
+        return redirect(url_for('home'))
+
+    project_dir = os.path.join('input', project_name)
+    if not os.path.exists(project_dir):
+        flash(f'Project "{project_name}" not found')
+
+    filepath = "input/" + project_name
+    return send_file(filepath, as_attachment=True)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "prod":
+            print("ttpExtractor: Prod")
+            app.run(host='0.0.0.0', debug=False)
+    else:
+        print("ttpExtractor: Debug")
+        app.run(debug=True)
