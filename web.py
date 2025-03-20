@@ -133,10 +133,7 @@ def upload_file():
         'note': note,
         'url': url,
     }
-
-    # replace file extension with .json
-    filepath_metadata = os.path.splitext(filepath)[0] + ".json"
-    with open(filepath_metadata, 'w') as f:
+    with open(filepath + ".json", 'w') as f:
         json.dump(metadata, f)
 
     # start processing the upload in the background
