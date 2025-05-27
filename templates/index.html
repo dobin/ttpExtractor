@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ttpExtractor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% include 'header.html' %}
 </head>
 <body>
-    <h1>TTP Extractor</h1>
+    {% include 'navigation.html' %}
+
+    <div class="indent">
+    <h2>Analyzed CTI Reports:</h2>
+
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -25,6 +26,9 @@
                 <a href="/project/{{ project }}">{{ project }}</a>
             </li>
         {% endfor %}
+    </ul>
+
+    </div>
 
 </body>
 </html>

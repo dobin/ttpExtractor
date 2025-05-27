@@ -4,3 +4,4 @@ input/
 output/
 *.key
 backup/
+.venv

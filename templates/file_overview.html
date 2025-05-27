@@ -1,0 +1,18 @@
+
+<h2>Report Details</h2>
+
+    {% if metadata != None %}
+            <h2>
+                <a href="{{ metadata['url'] }}">{{ metadata["note"] }}</a>
+            </h2>
+    {% endif %}
+    Link to <a href="/download/{{project_name}}">Original Report</a> <br>
+
+    <p>
+        <ul>
+            <li><b>Original</b>: Text extracted from PDF</li>
+            <li><b>ChatGPT paged</b>: Each PDF page by ChatGPT 4o</li>
+            <li><b>Gemini 2.0</b>: Full PDF with gemini-2.0-flash</li>
+            <li><b>Gemini 2.5</b>: Full PDF with gemini-2.5-flash-preview-05-20</li>
+        </ul>
+    </p>

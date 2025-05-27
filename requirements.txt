@@ -4,5 +4,9 @@ pypdf
 openai
 trafilatura
 flask
- unstructured
- unstructured[pdf]
+unstructured
+unstructured[pdf]
+
+pathlib
+google
+google.genai
