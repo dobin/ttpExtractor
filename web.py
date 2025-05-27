@@ -39,7 +39,25 @@ def process_file(filename):
 def home():
     output_dirs = os.listdir('output/')
     output_dirs.sort()
-    return render_template('index.html', title="Flask App", projects=output_dirs)
+
+    # read all metadata files
+    metadata = {}
+    for project in output_dirs:
+        metadata_file = os.path.join(app.config['UPLOAD_FOLDER'], project + '.json')
+        if os.path.exists(metadata_file):
+            with open(metadata_file, 'r') as f:
+                metadata[project] = json.load(f)
+                metadata[project]['project'] = project
+        else:
+            metadata[project] = {
+                'note': project,
+                'url': '',
+                'project': project
+            }
+
+    return render_template('index.html', title="Flask App", 
+                        projects=output_dirs,
+                        metadata=metadata)
 
 
 @app.route('/about')
