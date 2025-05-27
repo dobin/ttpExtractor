@@ -23,7 +23,6 @@
     <table>
         <tr>
             <th>Report Title</th>
-            <th>Download</th>
         </tr>
 
         {% for project, metadata in metadata.items() %}
@@ -34,9 +33,6 @@
                     {% else %}
                         {{project}}
                     {% endif %}
-                </td>
-                <td>
-                    <a href="/download/{{ project }}">Download PDF</a>
                 </td>
             </tr>
         {% endfor %}
