@@ -88,7 +88,7 @@ def project(project_name):
             # Skip files that don't have a number in the filename
             continue
 
-        print("Handle: {} {}".format(i, file))
+        #print("Handle: {} {}".format(i, file))
 
         data = ""
         with open(os.path.join(project_dir, file), 'r', encoding="utf-8") as f:

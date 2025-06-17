@@ -1,11 +1,20 @@
     {% if metadata != None %}
             <h2>
-                <a href="{{ metadata['url'] }}">{{ metadata["note"] }}</a>
+                {{ metadata["note"] }}
             </h2>
     {% else %}
             <h2>{{ project_name }}</h2>
     {% endif %}
-    Link to <a href="/download/{{project_name}}">Original Report</a> <br>
+
+    <ul>
+        <li>
+            <a href="{{ metadata['url'] }}">Original URL</a>
+        </li>
+        <li>
+            <a href="/download/{{project_name}}">Analyzed Report/PDF</a> <br>
+        </li>
+    </ul>
+    
 
     <p>
         <ul>
