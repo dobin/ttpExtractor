@@ -21,19 +21,6 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
-def allowed_file(filename):
-    if not '.' in filename:
-        print("No file extension in filename")
-        return False
-    if not filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
-        print("File extension not allowed: {}".format(filename.rsplit('.', 1)[1].lower()))
-        return False
-    if not secure_filename(filename) == filename:
-        print("Filename is not secure: {} -> {}".format(filename, secure_filename(filename)))
-        return False
-    return True
-
-
 def process_file(filename):
     ProcessUpload(filename, details=True)
 
@@ -120,11 +107,13 @@ def project(project_name):
     full_text = aggregated_chunks
 
     # gemini
+    gemini20_output = ""
     gemini20_file = os.path.join(project_dir, project_name + "_gemini20.txt")
     if os.path.exists(gemini20_file):
         with open(gemini20_file, 'r', encoding="utf-8") as f:
             gemini20_output = f.read()
     gemini25_file = os.path.join(project_dir, project_name + "_gemini25.txt")
+    gemini25_output = ""
     if os.path.exists(gemini25_file):
         with open(gemini25_file, 'r', encoding="utf-8") as f:
             gemini25_output = f.read()
@@ -162,20 +151,24 @@ def upload_file():
         flash('Invalid password')
         return redirect(request.url)
 
-    # file related
+    # check file related
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
     file = request.files['file']
-    if file.filename == '':
+    if not file or not file.filename or file.filename == '':
         flash('No selected file')
         return redirect(request.url)
-    if not file or not allowed_file(file.filename):
-        flash('File type not allowed')
+    
+    # cleanup filename
+    filename = secure_filename(file.filename)
+    filename_extension = filename.rsplit('.', 1)[1].lower()
+    if not filename_extension in ALLOWED_EXTENSIONS:
+        flash("File extension not allowed: {}".format(filename.rsplit('.', 1)[1].lower()))
         return redirect(request.url)
 
     # save file
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(filepath)
     
     # save file metadata
@@ -189,10 +182,10 @@ def upload_file():
         json.dump(metadata, f)
 
     # start processing the upload in the background
-    thread = threading.Thread(target=process_file, args=(file.filename,))
+    thread = threading.Thread(target=process_file, args=(filename,))
     thread.start()
     
-    flash(f'File "{file.filename}" uploaded successfully!')
+    flash(f'File "{filename}" uploaded successfully!')
     return redirect(url_for('home'))
 
 
