@@ -23,10 +23,13 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
     if not '.' in filename:
+        print("No file extension in filename")
         return False
     if not filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        print("File extension not allowed: {}".format(filename.rsplit('.', 1)[1].lower()))
         return False
     if not secure_filename(filename) == filename:
+        print("Filename is not secure: {} -> {}".format(filename, secure_filename(filename)))
         return False
     return True
 
