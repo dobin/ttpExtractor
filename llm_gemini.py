@@ -3,7 +3,12 @@ from google.genai import types
 import pathlib
 import os
 
-client_gemini = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+client_gemini = None
+
+
+def gemini_init():
+    global client_gemini
+    client_gemini = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
 def ProcessUpload_gemini(basename, prompt, type):
@@ -20,7 +25,7 @@ def ProcessUpload_gemini(basename, prompt, type):
     mypath = "output/" + basename + "/" + basename +"_" + type + ".txt"
     print(f"  -> writing results to {mypath}")
     with open(mypath, 'w') as f:
-        f.write("# Model: {}\r\n".format(model))
+        #f.write("# Model: {}\r\n".format(model))
         f.write(results_text)
 
 

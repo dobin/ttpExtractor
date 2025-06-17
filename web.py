@@ -5,8 +5,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from werkzeug.utils import secure_filename
 import json
 import threading
+import markdown
 
-from ttpextractor import ProcessUpload
+from ttpextractor import ProcessUpload, init
 
 app = Flask(__name__)
 
@@ -92,8 +93,9 @@ def project(project_name):
         elements[i]["idx"] = i
         if 'chunk' in file:
             elements[i]["text"] = data
+            elements[i]["text_html"] = markdown.markdown(data)
         elif 'response' in file:
-            elements[i]["response"] = data
+            elements[i]["response_html"] = markdown.markdown(data)
     ordered_elements = elements.values()
     ordered_elements = sorted(ordered_elements, key=lambda x: x["idx"])
 
@@ -127,6 +129,11 @@ def project(project_name):
     if os.path.exists(metadata_file):
         with open(metadata_file, 'r') as f:
             metadata = json.load(f)
+
+    print("Project: {}".format(project_name))
+    full_text = markdown.markdown(full_text)
+    gemini20_output = markdown.markdown(gemini20_output)
+    gemini25_output = markdown.markdown(gemini25_output)
 
     return render_template('project.html', 
         title=project_name, 
@@ -207,6 +214,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] == "prod":
             print("ttpExtractor: Prod")
+            init()
             app.run(host='0.0.0.0', debug=False)
     else:
         print("ttpExtractor: Debug")

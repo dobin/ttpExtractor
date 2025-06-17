@@ -7,13 +7,18 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from model import Chonk
 
-client_openai = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+client_openai = None
 
 MODEL = "gpt-4o"
 
 chunk_overlap = 100
 chunk_size_full = 30000  # Covers most articles. Needs 4o (context size)
 chunk_size_details = 2048  # reasonable size for detais
+
+
+def openai_init():
+    global client_openai
+    client_openai = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 def ProcessUpload_openai(filename, prompt, details):
@@ -202,12 +207,12 @@ def write_results(chonks: List[Chonk], basename):
         with open(filename_chunk, "w", encoding="utf-8") as file:
             file.write(chunk)
         with open(filename_response, "w", encoding="utf-8") as file:
-            file.write("# Model: {}\r\n".format(MODEL))
+            #file.write("# Model: {}\r\n".format(MODEL))
             file.write(response)
 
     with open(base_path + "aggregated_chunks.txt", "w", encoding="utf-8") as file:
         file.write(aggregated_chunks)
     with open(base_path + "aggregated_responses.txt", "w", encoding="utf-8") as file:
-        file.write("# Model: {}\r\n".format(MODEL))
+        #file.write("# Model: {}\r\n".format(MODEL))
         file.write(aggregated_responses)
 

@@ -4,8 +4,9 @@ import json
 from typing import List
 from model import Chonk
 
-from llm_openai import ProcessUpload_openai
-from llm_gemini import ProcessUpload_gemini
+from llm_openai import ProcessUpload_openai, openai_init
+from llm_gemini import ProcessUpload_gemini, gemini_init
+
 
 PROMPT = r"""
 Objective:
@@ -44,10 +45,20 @@ Example Output Format:
 """
 
 
+def init():
+    openai_init()
+    gemini_init() 
+
+
 def ProcessUpload(filename: str, details: bool):
+    print("Processing file:", filename)
+    print("  OpenAI...")
     ProcessUpload_openai(filename, PROMPT, details=details)
+    print("  Gemini 2.0...")
     ProcessUpload_gemini(filename, PROMPT, type="gemini20")
+    print("  Gemini 2.5...")
     ProcessUpload_gemini(filename, PROMPT, type="gemini25")
+    print("Processing complete.")
 
 
 if __name__ == "__main__":

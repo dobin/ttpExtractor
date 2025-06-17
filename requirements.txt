@@ -6,7 +6,7 @@ trafilatura
 flask
 unstructured
 unstructured[pdf]
-
+markdown
 pathlib
 google
 google.genai

@@ -29,10 +29,7 @@
             <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info"
                     type="button" role="tab" aria-controls="info" aria-selected="true">Info</button>
         </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="original-tab" data-bs-toggle="tab" data-bs-target="#original"
-                    type="button" role="tab" aria-controls="original" aria-selected="false">Original</button>
-        </li>
+
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="chatgpt-tab" data-bs-toggle="tab" data-bs-target="#chatgpt"
                     type="button" role="tab" aria-controls="chatgpt" aria-selected="false">ChatGPT Paged</button>
@@ -44,6 +41,11 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="gemini25-tab" data-bs-toggle="tab" data-bs-target="#gemini25"
                     type="button" role="tab" aria-controls="gemini25" aria-selected="false">Gemini 2.5</button>
+        </li>
+        
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="original-tab" data-bs-toggle="tab" data-bs-target="#original"
+                    type="button" role="tab" aria-controls="original" aria-selected="false">Original</button>
         </li>
     </ul>
 
@@ -58,7 +60,7 @@
                     <th>Original Text</th>
                 </tr>
                 <tr>
-                    <td>{{full_text}}</td>
+                    <td>{{full_text|safe}}</td>
                 </tr>
             </table>
         </div>
@@ -71,8 +73,8 @@
                 </tr>
                 {% for element in elements %}
                     <tr>
-                        <td>{{element["text"]}}</td>
-                        <td><pre>{{element["response"]}}</pre></td>
+                        <td>{{element["text_html"]|safe}}</td>
+                        <td>{{element["response_html"]|safe}}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -84,7 +86,7 @@
                     <th>Gemini 2.0</th>
                 </tr>
                 <tr>
-                    <td><pre>{{gemini20_output}}</pre></td>
+                    <td>{{gemini20_output|safe}}</td>
                 </tr>
             </table>
         </div>
@@ -95,7 +97,7 @@
                     <th>Gemini 2.5</th>
                 </tr>
                 <tr>
-                    <td><pre>{{gemini25_output}}</pre></td>
+                    <td>{{gemini25_output|safe}}</td>
                 </tr>
             </table>
         </div>
