@@ -25,6 +25,10 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 def process_file(filename):
     ProcessUpload(filename, details=True)
 
+@app.template_filter('datetimeformat')
+def datetimeformat(value, format='%Y-%m-%d'):
+    import datetime
+    return datetime.datetime.fromtimestamp(value).strftime(format)
 
 @app.route('/')
 def home():
@@ -39,6 +43,11 @@ def home():
             with open(metadata_file, 'r') as f:
                 metadata[project] = json.load(f)
                 metadata[project]['project'] = project
+
+            try:
+                metadata[project]['ctime'] = os.path.getctime(metadata_file)
+            except Exception:
+                pass
         else:
             metadata[project] = {
                 'note': project,
@@ -119,8 +128,6 @@ def project(project_name):
     if os.path.exists(gemini25_file):
         with open(gemini25_file, 'r', encoding="utf-8") as f:
             gemini25_output = f.read()
-    #gemini20_output = gemini20_output.replace("\n", "<br>")
-    #gemini25_output = gemini25_output.replace("\n", "<br>")
 
     # check if we have some more infos
     metadata_file = os.path.join(

@@ -7,8 +7,7 @@
     {% include 'navigation.html' %}
 
     <div class="indent">
-    <h2>Analyzed CTI Reports:</h2>
-
+    <h2>Analyzed CTI Reports</h2>
 
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -20,13 +19,18 @@
         {% endif %}
     {% endwith %}
 
-    <table>
-        <tr>
-            <th>Report Title</th>
-        </tr>
+    <p>
+    CTI reports about incidents and malware analysis, analyzed by LLM's for TTPs. <br>
+    With focus on the <b>procedures</b> part, which is generally missing in TTP analysis. <br>
+    No IOCs are included, as they are not important. 
+    </p>
 
+    <table>
         {% for project, metadata in metadata.items() %}
             <tr>
+                <td>
+                    {{ metadata['ctime']|datetimeformat  }}
+                </td>
                 <td>
                     {% if metadata %}
                         <a href="/project/{{ project }}">{{ metadata['note'] }}</a>
@@ -34,6 +38,7 @@
                         {{project}}
                     {% endif %}
                 </td>
+                
             </tr>
         {% endfor %}
     </table>
