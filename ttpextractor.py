@@ -18,6 +18,7 @@ Instructions:
     Extract executed programs and tools used for reconnaissance, privilege escalation, lateral movement, persistence, or impact.
     Preserve the sequence and context of actions where possible to maintain logical attack flow.
     Exclude passive indicators (IOCs) such as file hashes, domain names, or IP addresses—focus only on tactics, techniques, and procedures (TTPs).
+    Exclude Command and Control (C2) details unless they are directly related to the execution of commands or tools.
     If the CTI report lacks explicit command lines, infer likely commands based on described behavior and known attack methodologies.
     Structure the output in a clear format to facilitate red team emulation.
 
