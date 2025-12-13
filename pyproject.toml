@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "ttpextractor"
+version = "0.1.0"
+description = "Uses LLM to extract TTP's from CTI report PDFs"
+authors = ["dobin"]
+readme = "README.md"
+license = "LICENSE"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+langchain = "*"
+langchain-community = "*"
+pypdf = "*"
+openai = "*"
+trafilatura = "*"
+flask = "*"
+unstructured = {extras = ["pdf"], version = "*"}
+markdown = "*"
+pathlib = "*"
+google-genai = "*"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

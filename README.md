@@ -18,6 +18,14 @@ It analyzes it in three ways:
 
 ## Install
 
+### Using Poetry (recommended)
+
+```
+$ poetry install
+```
+
+### Using pip
+
 ```
 $ pip install -r requirements.txt
 ```
@@ -28,7 +36,7 @@ $ pip install -r requirements.txt
 $ export OPENAI_API_KEY="..."
 $ export GEMINI_API_KEY="..."
 $ cp ttp-test.pdf input/
-$ python ./ttpextractor.py ttp-test.pdf
+$ poetry run python ./ttpextractor.py ttp-test.pdf
 ```
 
 Result: 
@@ -46,7 +54,7 @@ ttp-test.pdf_1_response.txt
 ```
 $ export OPENAI_API_KEY="..."
 $ export UPLOAD_PW="..."
-$ python ./web.py
+$ poetry run python ./web.py
 ```
 
 Open `http://localhost:5000`.
