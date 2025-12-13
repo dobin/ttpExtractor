@@ -3,7 +3,7 @@ from typing import List
 
 from openai import OpenAI
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from model import Chonk
 
