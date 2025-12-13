@@ -4,7 +4,7 @@ from typing import List
 from openai import OpenAI
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.schema import Document
+from langchain_core.documents import Document
 from model import Chonk
 
 client_openai = None
