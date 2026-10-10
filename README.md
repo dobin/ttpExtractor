@@ -18,16 +18,13 @@ It analyzes it in three ways:
 
 ## Install
 
-### Using Poetry (recommended)
+[Install uv](https://docs.astral.sh/uv/getting-started/installation/) if it is not
+already available, then create the project environment and install the
+requirements:
 
-```
-$ poetry install
-```
-
-### Using pip
-
-```
-$ pip install -r requirements.txt
+```shell
+$ uv venv
+$ uv pip install -r requirements.txt
 ```
 
 ## Commandline 
@@ -39,7 +36,7 @@ GEMINI_API_KEY=...
 UPLOAD_PW=...
 EOF
 $ cp ttp-test.pdf input/
-$ poetry run python ./ttpextractor.py ttp-test.pdf
+$ uv run python ./ttpextractor.py ttp-test.pdf
 ```
 
 The application loads these variables from `.env` in the project directory.
@@ -59,7 +56,7 @@ ttp-test.pdf_1_response.txt
 ## Start Web UI
 
 ```
-$ poetry run python ./web.py
+$ uv run python ./web.py
 ```
 
 Open `http://localhost:5000`.
