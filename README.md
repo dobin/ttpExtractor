@@ -33,11 +33,18 @@ $ pip install -r requirements.txt
 ## Commandline 
 
 ```
-$ export OPENAI_API_KEY="..."
-$ export GEMINI_API_KEY="..."
+$ cat > .env <<'EOF'
+OPENAI_API_KEY=...
+GEMINI_API_KEY=...
+UPLOAD_PW=...
+EOF
 $ cp ttp-test.pdf input/
 $ poetry run python ./ttpextractor.py ttp-test.pdf
 ```
+
+The application loads these variables from `.env` in the project directory.
+Variables already exported in the environment take precedence. Do not commit
+`.env`, since it contains secrets.
 
 Result: 
 ```
@@ -52,8 +59,6 @@ ttp-test.pdf_1_response.txt
 ## Start Web UI
 
 ```
-$ export OPENAI_API_KEY="..."
-$ export UPLOAD_PW="..."
 $ poetry run python ./web.py
 ```
 

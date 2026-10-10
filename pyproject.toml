@@ -11,6 +11,7 @@ python = "^3.9"
 langchain = "*"
 langchain-community = "*"
 langchain-text-splitters = "*"
+langchain-core = "*"
 pypdf = "*"
 openai = "*"
 trafilatura = "*"
@@ -19,6 +20,7 @@ unstructured = {extras = ["pdf"], version = "*"}
 markdown = "*"
 pathlib = "*"
 google-genai = "*"
+python-dotenv = "*"
 
 [tool.poetry.group.dev.dependencies]
 

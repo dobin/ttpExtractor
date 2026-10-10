@@ -10,3 +10,4 @@ markdown
 pathlib
 google
 google.genai
+python-dotenv

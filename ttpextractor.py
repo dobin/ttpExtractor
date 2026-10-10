@@ -1,8 +1,14 @@
 import sys
 import os
 import json
+from pathlib import Path
 from typing import List
+from dotenv import load_dotenv
 from model import Chonk
+
+# Load variables from the project .env before importing code that initializes
+# the LLM clients. Existing environment variables take precedence by default.
+load_dotenv(Path(__file__).with_name(".env"))
 
 from llm_openai import ProcessUpload_openai, openai_init
 from llm_gemini import ProcessUpload_gemini, gemini_init

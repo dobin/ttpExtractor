@@ -1,4 +1,7 @@
-__pycache__
+.env
+.venv/
+__pycache__/
+*.py[cod]__pycache__
 doc/
 input/
 output/
